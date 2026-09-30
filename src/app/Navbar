@@ -1,0 +1,9 @@
+# Query: components/shared/Navbar
+# ContextLines: 1
+
+1 result - 1 file
+
+src\app\layout.tsx:
+  3  import "./globals.css";
+  4: import Navbar from "./components/shared/Navbar";
+  5  
