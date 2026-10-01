@@ -1,25 +1,9 @@
 import BookCard from "./shared/BookCard";
 import { Ibook } from "@/types/books.type";
+import booksData from "@/../public/booksData.json";
 
-const getBooks = async (): Promise<Ibook[]> => {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_BASED_URL || "http://localhost:3000"}/booksData.json`,
-      {
-        cache: "no-store",
-      }
-    );
-
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching books data:", error);
-    return [];
-  }
-};
-
-const Books = async () => {
-  const booksData: Ibook[] = await getBooks();
+const Books = () => {
+  const books: Ibook[] = booksData;
 
   return (
     <section className="container mx-auto my-10 px-4">
@@ -28,7 +12,7 @@ const Books = async () => {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {booksData.slice(0, 6).map((book: Ibook, ind: number) => {
+        {books.slice(0, 6).map((book: Ibook, ind: number) => {
           return <BookCard key={ind} book={book} />;
         })}
       </div>

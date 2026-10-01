@@ -3,6 +3,7 @@ import WishListButton from "@/app/components/bookDetails/WishListButton";
 import { Ibook } from "@/types/books.type";
 import Image from "next/image";
 import React from "react";
+import booksData from "@/../public/booksData.json";
 
 interface IBookDetailsPageProps {
   params: Promise<{
@@ -10,32 +11,13 @@ interface IBookDetailsPageProps {
   }>;
 }
 
-const getBooks = async (): Promise<Ibook[]> => {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_BASED_URL || "http://localhost:3000"}/booksData.json`,
-      {
-        cache: "no-store",
-      }
-    );
-
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching books data:", error);
-    return [];
-  }
-};
-
 const BookDetailsPage = async ({
   params,
 }: IBookDetailsPageProps) => {
   const { id } = await params;
 
-  const booksData = await getBooks();
-
   const book = booksData.find(
-    (b: Ibook) => String(b.bookId) === String(id)
+    (book: Ibook) => String(book.bookId) === String(id)
   );
 
   if (!book) {
@@ -72,9 +54,11 @@ const BookDetailsPage = async ({
 
             <div className="flex items-center gap-2 bg-warning/10 text-warning px-4 py-2 rounded-full">
               <span className="text-lg">★</span>
+
               <span className="font-bold">
                 {book.rating}
               </span>
+
               <span className="text-xs text-base-content/60">
                 / 5
               </span>
