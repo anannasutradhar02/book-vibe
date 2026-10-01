@@ -5,22 +5,22 @@ import React, { createContext, ReactNode, useState } from "react";
 
 interface IBooksContext {
   readBooks: Ibook[];
-    setReadBooks : React.Dispatch<React.SetStateAction<Ibook[]>>;
-    wishList : Ibook[];
-    setWishList:React.Dispatch<React.SetStateAction<Ibook[]>>;
+  setReadBooks: React.Dispatch<React.SetStateAction<Ibook[]>>;
+  wishList: Ibook[];
+  setWishList: React.Dispatch<React.SetStateAction<Ibook[]>>;
 }
 
-// Context তৈরি এবং এক্সপোর্ট করা
+// Context তৈরি এবং এক্সপোর্ট করা (এখানে ব্র্যাকেট বন্ধ করা ঠিক করা হয়েছে)
 export const BooksContext = createContext<IBooksContext>({
-  readBooks : [],
-    setReadBooks : ()=>{},
-    wishList: [],
-    setWishList : ()=>{}
-}
+  readBooks: [],
+  setReadBooks: () => {},
+  wishList: [],
+  setWishList: () => {},
+});
 
 export const BooksProvider = ({ children }: { children: ReactNode }) => {
-  const [readBooks, setReadBooks] = useState<[Ibook]>([]);
-  const [wishList, setWishList] = useState<[Ibook]>([]);
+  const [readBooks, setReadBooks] = useState<Ibook[]>([]);
+  const [wishList, setWishList] = useState<Ibook[]>([]);
 
   const sharedData = {
     readBooks,
